@@ -141,6 +141,8 @@ class PdfTtfFont extends PdfFont {
       return super.putText(text);
     }
 
+    print(text);
+
     final Runes runes = text.runes;
     final PdfStream stream = PdfStream();
     stream.putBytes(latin1.encode('<'));
@@ -151,6 +153,7 @@ class PdfTtfFont extends PdfFont {
         unicodeCMap.cmap.add(rune);
       }
 
+      // print('$rune, $char, ${char.toRadixString(16).padLeft(4, '0')}');
       stream.putBytes(latin1.encode(char.toRadixString(16).padLeft(4, '0')));
     }
     stream.putBytes(latin1.encode('>'));
